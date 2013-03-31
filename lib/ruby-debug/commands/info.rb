@@ -347,7 +347,7 @@ item. If \'verbose\' is given then the entire stack frame is shown.'],
     def info_threads(*args)
       ok, verbose = info_thread_preamble(args[0])
       return unless ok
-      threads = Debugger.contexts.sort_by{|c| c.thnum}.each do |c|
+      Debugger.contexts.sort_by{|c| c.thnum}.each do |c|
         display_context(c, !verbose)
         if verbose and not c.ignored?
           (0...c.stack_size).each do |idx|

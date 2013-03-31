@@ -15,25 +15,29 @@ module Debugger
 
     def execute
       listsize = Command.settings[:listsize]
+      b = 0
       if !@match || !(@match[1] || @match[2])
-        b = @state.previous_line ? 
-        @state.previous_line + listsize : @state.line - (listsize/2)
+        if @state.previous_line
+          b = @state.previous_line + listsize
+        else
+          b = @state.line - (listsize/2)
+        end
         e = b + listsize - 1
       elsif @match[1] == '-'
-        b = if @state.previous_line
-              if  @state.previous_line > 0
-                @state.previous_line - listsize 
-              else
-                @state.previous_line
-              end
-            else 
-              @state.line - (listsize/2)
-            end
+        if @state.previous_line
+          if  @state.previous_line > 0
+            b = @state.previous_line - listsize
+          else
+            b = @state.previous_line
+          end
+        else
+          b = @state.line - (listsize/2)
+        end
         e = b + listsize - 1
       elsif @match[1] == '='
         @state.previous_line = nil
         b = @state.line - (listsize/2)
-        e = b + listsize -1
+        e = b + listsize - 1
       else
         b, e = @match[2].split(/[-,]/)
         if e

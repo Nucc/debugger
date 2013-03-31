@@ -29,7 +29,7 @@ module Debugger
           the "catch" command, and wish to pass the exception on to the
           code that you're debugging.
          }
-     end
+      end
     end
   end
 end

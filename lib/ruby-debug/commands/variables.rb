@@ -133,7 +133,7 @@ module Debugger
     private
 
       def get_obj(match)
-        obj = if match[1]
+        if match[1]
           begin
             ObjectSpace._id2ref(match[1].hex)
           rescue RangeError

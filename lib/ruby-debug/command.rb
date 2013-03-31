@@ -181,7 +181,7 @@ module Debugger
     # TODO: Add optional timeout
     def debug_eval(str, b = get_binding)
       begin
-        val = eval(str, b)
+        eval(str, b)
       rescue StandardError, ScriptError => e
         text_message = if Command.settings[:stack_trace_on_error]
           at = eval("caller(1)", b)
